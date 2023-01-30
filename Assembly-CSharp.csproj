@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\EnemyMovment.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/uni/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -672,6 +673,12 @@
     </Reference>
     <Reference Include="Unity.2D.IK.Runtime">
         <HintPath>D:/New_Example/TIle Vania (4th learning project)/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+        <HintPath>D:/New_Example/TIle Vania (4th learning project)/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+        <HintPath>D:/New_Example/TIle Vania (4th learning project)/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Triangle.Runtime">
         <HintPath>D:/New_Example/TIle Vania (4th learning project)/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>

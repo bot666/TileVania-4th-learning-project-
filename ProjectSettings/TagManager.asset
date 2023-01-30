@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - EnemyFlip
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -15,8 +17,8 @@ TagManager:
   - Player
   - Ladder
   - BackGround
-  - 
-  - 
+  - PlayerFeet
+  - Enemies
   - 
   - 
   - 
@@ -53,9 +55,12 @@ TagManager:
   - name: Ladder
     uniqueID: 1891650411
     locked: 0
-  - name: Player
-    uniqueID: 4192147707
-    locked: 0
   - name: Ground
     uniqueID: 1349533959
+    locked: 0
+  - name: Enemies
+    uniqueID: 1956060273
+    locked: 0
+  - name: Player
+    uniqueID: 4192147707
     locked: 0
