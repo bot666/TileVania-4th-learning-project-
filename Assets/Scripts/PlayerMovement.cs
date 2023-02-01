@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Cinemachine;
+using static Cinemachine.CinemachineStateDrivenCamera;
+using System.Threading;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,10 +16,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D myRigidBody;
     Animator   myAnimator;
     float gravityScaleAtstart;
+    GameObject myCamera;
 
   BoxCollider2D  myBoxCollider;
   CapsuleCollider2D myBodyColider;
-  
+  bool isAlive = true;
+    int delayAmount = 200;
     
     
     void Start()
@@ -27,16 +31,20 @@ public class PlayerMovement : MonoBehaviour
         myBoxCollider = GetComponent<BoxCollider2D>();
         gravityScaleAtstart = myRigidBody.gravityScale;
         myBodyColider = GetComponent<CapsuleCollider2D>();
+        myCamera = GameObject.FindWithTag("CAMERA");
+        
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (!isAlive){return;}
         Run();
         FlipSprite();
         Ladder();
-        
+        Die();
+        Debug.Log(isAlive)  ;
     }
     void Ladder()
     {
@@ -55,40 +63,24 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
+
+
     void OnMove(InputValue value)
     {
+        if (!isAlive) { return; }
         moveInput = value.Get<Vector2>();
         Debug.Log(moveInput);
     }
     void OnJump (InputValue value)
     {
+        if (!isAlive) { return; }
+        
        if(!myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {return;}
         if(value.isPressed)
         {
             myRigidBody.velocity += new Vector2(0f, jumpSpeed);
-             
-            
-           
-          
-
-
         }
-        
-    
-    
-
-    
-
-        //  if (myCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        //  {
-        //   jump = true;
-        //  }
-
-        //   Debug.Log(jump);  
-        //myCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
-   
-        
-      
 
     }
     
@@ -107,6 +99,40 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
         }
         
+    }
+    async void Die()
+    {
+        if (myBodyColider.IsTouchingLayers(LayerMask.GetMask("Enemies")) |
+        myBodyColider.IsTouchingLayers(LayerMask.GetMask("Hazards")) )
+        {
+            isAlive = false;
+            myAnimator.SetTrigger("isDead");
+            myRigidBody.velocity += new Vector2(0f, jumpSpeed);
+
+            shakePlus();
+            await System.Threading.Tasks.Task.Delay(delayAmount);
+            shakeMinus();
+            await System.Threading.Tasks.Task.Delay(delayAmount);
+            shakeZero();
+
+            
+        }
+        
+
+
+    }
+    void shakePlus()
+    {
+        myCamera.transform.rotation = Quaternion.Euler(1f, 1f, 3f);
+    }
+    void shakeMinus()
+    {
+        myCamera.transform.rotation = Quaternion.Euler(-1f, -1f, -5f);
+        
+    }
+    void shakeZero()
+    {
+        myCamera.transform.rotation = Quaternion.Euler(0f, 0f, 0f); 
     }
 
 
