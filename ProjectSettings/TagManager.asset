@@ -7,6 +7,8 @@ TagManager:
   - EnemyFlip
   - Platform
   - CAMERA
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - PlayerFeet
   - Enemies
   - Hazards
-  - 
-  - 
+  - Bullets
+  - Intractables
   - 
   - 
   - 
@@ -58,6 +60,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1349533959
+    locked: 0
+  - name: Intractables
+    uniqueID: 4207394139
     locked: 0
   - name: Enemies
     uniqueID: 1956060273

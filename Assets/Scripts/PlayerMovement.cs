@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 2.0f;
     [SerializeField] float jumpSpeed = 5f;
     [SerializeField] float ladderSpeed = 5f;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform gun;
     
     Rigidbody2D myRigidBody;
     Animator   myAnimator;
@@ -22,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
   CapsuleCollider2D myBodyColider;
   bool isAlive = true;
     int delayAmount = 200;
-    
+
+
     
     void Start()
     {
@@ -32,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         gravityScaleAtstart = myRigidBody.gravityScale;
         myBodyColider = GetComponent<CapsuleCollider2D>();
         myCamera = GameObject.FindWithTag("CAMERA");
-        
+
     }
 
 
@@ -79,11 +82,17 @@ public class PlayerMovement : MonoBehaviour
        if(!myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) {return;}
         if(value.isPressed)
         {
-            myRigidBody.velocity += new Vector2(0f, jumpSpeed);
+            myRigidBody.velocity = new Vector2(0f, jumpSpeed);
         }
 
     }
-    
+    void OnFire (InputValue value)
+    {
+        if (!isAlive) { return; }
+        Instantiate(bullet, gun.position, transform.rotation);
+
+    }
+
     void Run ()
     {
         Vector2 playerVelocity = new Vector2 (moveInput.x * speed , myRigidBody.velocity.y);
