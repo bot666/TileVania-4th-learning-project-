@@ -12,7 +12,11 @@ public class Exit : MonoBehaviour
 
 void OnTriggerEnter2D(Collider2D other)
 {
-    StartCoroutine(LoadNextLevel());
+    if(other.tag == "Player")
+    {
+            StartCoroutine(LoadNextLevel());
+    }
+    
 }
 IEnumerator LoadNextLevel()
 {
@@ -23,6 +27,6 @@ if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
 {
  nextSceneIndex = 0;
 }
-SceneManager.LoadScene(currentSceneIndex + 1);
+SceneManager.LoadScene(nextSceneIndex);
 }
 }

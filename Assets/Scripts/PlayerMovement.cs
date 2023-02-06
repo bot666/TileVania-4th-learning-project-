@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
   CapsuleCollider2D myBodyColider;
   bool isAlive = true;
     int delayAmount = 200;
-
+    GameSession myGameSession;
 
     
     void Start()
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         gravityScaleAtstart = myRigidBody.gravityScale;
         myBodyColider = GetComponent<CapsuleCollider2D>();
         myCamera = GameObject.FindWithTag("CAMERA");
+        myGameSession = FindObjectOfType<GameSession>();
 
     }
 
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
         Ladder();
         Die();
-        Debug.Log(isAlive)  ;
+          ;
     }
     void Ladder()
     {
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAlive) { return; }
         moveInput = value.Get<Vector2>();
-        Debug.Log(moveInput);
+        
     }
     void OnJump (InputValue value)
     {
@@ -123,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
             shakeMinus();
             await System.Threading.Tasks.Task.Delay(delayAmount);
             shakeZero();
-
+            myGameSession.ProcessPlayerDeath();
             
         }
         
