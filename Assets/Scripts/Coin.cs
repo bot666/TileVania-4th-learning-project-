@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioClip coin;
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -20,6 +20,8 @@ public class Coin : MonoBehaviour
     if(other.tag == "Player")
     {
         Destroy(gameObject);
+            AudioSource.PlayClipAtPoint(coin, Camera.main.transform.position);
     }
+    
 }
 }
