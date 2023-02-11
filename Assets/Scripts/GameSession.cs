@@ -37,10 +37,7 @@ public class GameSession : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        
-    }
+
 
     public void AddToScore(int pointsToAdd)
     {
@@ -70,6 +67,7 @@ public class GameSession : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         Destroy(gameObject);
+        
     }
 
 
