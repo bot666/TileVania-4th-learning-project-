@@ -27,6 +27,7 @@ if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
 {
  nextSceneIndex = 0;
 }
+FindObjectOfType<ScenePresist>().ResetScenePresist();
 SceneManager.LoadScene(nextSceneIndex);
 }
 }
